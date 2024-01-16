@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HowAreU</title>
+    <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Barrio&display=swap');        
+        * {
+            font-family: 'Barrio', system-ui;        
+        }
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            transition: background-color 0.5s ease;
+        }
+        .wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        #moodBox {
+            height: 200px;
+            width: 200px;
+            background-size: cover;
+            background-image: url('Qmark.png');
+        }
+        #moodBtn {
+            padding: 15px;
+            margin: 10px;
+            border-radius: 10px;
+        }
+        #moodBtn:hover {
+            background-color: #191919;
+            color: #fff;
+            transition:background-color 1s ease;
+       }
+        #content {
+            border: 10px solid black;
+            padding: 10px;
+            border-radius: 30px;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-20px);
+            }
+            60% {
+                transform: translateY(-10px);
+            }
+        }
+        p {
+            display: inline-block;
+            font-size: 24px;
+            animation: bounce 2s infinite; 
+        }
+
+        @media (max-width: 768px) {
+            #moodBox {
+                height: 150px;
+                width: 150px;
+            }
+            #moodBtn {
+                font-size: 14px;
+            }
+        }
+
+    </style>
+
+</head>
+<body>
+    <div class="wrapper">
+        <h1 id="header">How are you feeling today?</h1>
+            <p id="happy_sad"></p>
+            <div id="content">
+                <div id="moodBox"></div>       
+            </div>
+        <button id="moodBtn">Mood</button>
+    </div>
+
+    <script>
+        const moodBox = document.getElementById("moodBox");
+        const changeMoodBtn = document.getElementById("moodBtn");
+
+
+        moodBox.style.display = "none";
+        // Show Qmark-img once the page is loaded
+        window.addEventListener('load', function() {
+            moodBox.style.display = "block";
+        });
+
+        changeMoodBtn.addEventListener('click', changeMood);
+
+        function changeMood() {
+            const currentBackground = moodBox.style.backgroundImage;
+
+            if (currentBackground.includes("happy.png")) {
+                moodBox.style.backgroundImage = "url('sad.png')";
+                document.body.style.backgroundColor = "#333";
+                document.getElementById("header").style.color = "#fff";
+                document.getElementById("happy_sad").innerHTML = ("SAD...") 
+                document.getElementById("happy_sad").style.color = "#fff";
+            } else {
+                moodBox.style.backgroundImage = "url('happy.png')";
+                document.body.style.backgroundColor = "#fff";
+                document.getElementById("header").style.color = "#333";
+                document.getElementById("happy_sad").innerHTML = ("...HAPPY")
+                document.getElementById("happy_sad").style.color = "#333";
+            }
+        }
+    </script>
+</body>
+</html>
